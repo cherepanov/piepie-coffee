@@ -16,7 +16,7 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/JsDoc.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/jsmacro.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -26,7 +26,17 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/jsmacro.launch</value>
+					<value>&lt;project&gt;/.externalToolBuilders/coffee.launch</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>auto,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/JsDoc.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>

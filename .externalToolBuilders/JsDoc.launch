@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.ui.externaltools.ProgramBuilderLaunchConfigurationType">
-<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${workspace}"/>
+<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;resources&gt;&#13;&#10;&lt;item path=&quot;/piepie/jsdoc&quot; type=&quot;2&quot;/&gt;&#13;&#10;&lt;/resources&gt;}"/>
 <booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
 <booleanAttribute key="org.eclipse.ui.externaltools.ATTR_BUILDER_ENABLED" value="true"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_BUILD_SCOPE" value="${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;resources&gt;&#13;&#10;&lt;item path=&quot;/piepie/build/final&quot; type=&quot;2&quot;/&gt;&#13;&#10;&lt;/resources&gt;}"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="C:\Program Files\Java\jre6\bin\java.exe"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_RUN_BUILD_KINDS" value="full,incremental,auto,"/>
-<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-jar jsrun.jar app\run.js &quot;C:\Users\Aleka\Workspaces\web\piepie&quot; -t=&quot;C:\Users\Aleka\programs\jsdoc-toolkit\templates\codeview&quot; -d=&quot;C:\Users\Aleka\Workspaces\web\piepie\jsdoc&quot;"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-jar jsrun.jar app\run.js ${project_loc}\build\final -t=templates\codeview -d=${project_loc}\jsdoc&quot;"/>
 <booleanAttribute key="org.eclipse.ui.externaltools.ATTR_TRIGGERS_CONFIGURED" value="true"/>
 <stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="C:\Users\Aleka\programs\jsdoc-toolkit"/>
 </launchConfiguration>

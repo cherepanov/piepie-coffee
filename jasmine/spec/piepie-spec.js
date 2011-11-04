@@ -22,6 +22,8 @@ describe("PiePie", function() {
 
   it("label must equal", function() {
 	  console.log(piepie.getLabelText());
+	  console.log(piepie.getPrivateProperty("legendWidth"));
+	  console.log(piepie.getPrivateProperty("legendHeight"));
 	  expect(piepie.getLabelText()).toEqual(testData.label);
   });
 
