@@ -20,11 +20,26 @@ describe("PiePie", function() {
     expect(piepie).toBeDefined();
   });
 
-  it("label must equal", function() {
-	  console.log(piepie.getLabelText());
-	  console.log(piepie.getPrivateProperty("legendWidth"));
-	  console.log(piepie.getPrivateProperty("legendHeight"));
-	  expect(piepie.getLabelText()).toEqual(testData.label);
+  describe('check data', function() {
+	  it("data must be loaded correctly", function() {
+		  expect(piepie.getLabelText()).toEqual(testData.label);
+	  });
   });
 
+  describe('check visual', function() {
+	  it("legend must not cross chart boundary", function() {
+		  expect(
+				  piepie.getPrivateProperty("legendPosX") + piepie.getPrivateProperty("legendWidth")
+		  ).toBeLessThan(piepie.getPrivateProperty("chartWidth"));
+	  });
+	  
+	  it("legend must not cross chart boundary", function() {
+		  console.log(piepie.getPrivateProperty("legendHeight"));
+		  console.log(piepie.getPrivateProperty("legendPosY"));
+		  expect(
+				  piepie.getPrivateProperty("legendPosY") + piepie.getPrivateProperty("legendHeight") - 1
+		  ).toBeLessThan(piepie.getPrivateProperty("chartHeight"));
+	  });
+  });
+  
 });

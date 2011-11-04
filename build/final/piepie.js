@@ -10,8 +10,8 @@
  * @param {json} config configuration object
  *  @param {Integer}  config.x      x-coordinate location
  *  @param {Integer}  config.y      y-coordinate location
- *  @param {Integer}  config.width    chart canvas width
- *  @param {Integer}  config.height     chart canvas height
+ *  @param {Integer}  chartWidth    chart canvas width
+ *  @param {Integer}  chartHeight     chart canvas height
  *  @param {json}     config.background   background fill attributes
  *  @param {Array}    config.colors     array of sector colors in hex format
  *  @param {String}   config.dataURL    location of service
@@ -20,20 +20,24 @@
 var PiePie;
 PiePie = (function() {
   function PiePie(config) {
-    var data, drawLegend, drawSector, label, legendHeight, legendWidth, onDrawFinish, paper, pieCenterX, pieCenterY, pieInnerRadius, pieOuterRadius, pieSpotRadius, rotation;
-    pieCenterX = config.width / 2;
-    pieCenterY = config.height / 2;
-    pieInnerRadius = config.width * 0.2;
-    pieOuterRadius = config.width * 0.35;
+    var chartHeight, chartWidth, data, drawLegend, drawSector, label, legendHeight, legendPosX, legendPosY, legendWidth, onDrawFinish, paper, pieCenterX, pieCenterY, pieInnerRadius, pieOuterRadius, pieSpotRadius, rotation;
+    chartWidth = config.width;
+    chartHeight = config.height;
+    pieCenterX = chartWidth / 2;
+    pieCenterY = chartHeight / 2;
+    pieInnerRadius = chartWidth * 0.2;
+    pieOuterRadius = chartWidth * 0.35;
     pieSpotRadius = (pieOuterRadius + pieInnerRadius) * 0.53;
     data = {};
     label = "";
     rotation = (config.rotation ? config.rotation : 0);
     onDrawFinish = config.onDrawFinish || function() {};
-    paper = Raphael(config.x, config.y, config.width, config.height);
+    paper = Raphael(config.x, config.y, chartWidth, chartHeight);
     legendWidth = 0;
     legendHeight = 0;
-    paper.rect(0, 0, config.width, config.height).attr(config.background);
+    legendPosX = 0;
+    legendPosY = 0;
+    paper.rect(0, 0, chartWidth, chartHeight).attr(config.background);
     paper.customAttributes.arc = function(startAngle, endAngle, innerRadius, outerRadius) {
       var innerEndX, innerEndY, innerStartX, innerStartY, outerEndX, outerEndY, outerStartX, outerStartY;
       outerStartX = pieCenterX - outerRadius * Math.cosA(startAngle);
@@ -65,6 +69,10 @@ PiePie = (function() {
         });
       });
     });
+    /**
+     * @memberOf PiePie
+     * @return {any} private class variable
+    */
     PiePie.prototype.getPrivateProperty = function(name) {
       return eval(name);
     };
@@ -127,23 +135,23 @@ PiePie = (function() {
       }, 1000, ">");
     };
     drawLegend = function() {
-      var l, x, y;
-      x = pieCenterX - pieOuterRadius;
-      y = pieCenterY + config.height * 0.1;
+      var l, y;
+      legendPosX = pieCenterX - pieOuterRadius;
+      legendPosY = pieCenterY + chartHeight * 0.1;
       switch (true) {
         case (180 > rotation && rotation > 89):
-          y = pieCenterY - data.length * 10;
-          x = config.width * 0.1;
+          legendPosY = pieCenterY - data.length * 10;
+          legendPosX = chartWidth * 0.05;
           break;
         case (270 > rotation && rotation > 179):
-          y = config.height * 0.1;
+          legendPosY = chartHeight * 0.1;
           break;
         case rotation > 269:
-          x = pieCenterX + config.width * 0.05;
-          y = pieCenterY - data.length * 10;
+          legendPosX = pieCenterX + chartWidth * 0.05;
+          legendPosY = pieCenterY - data.length * 10;
           break;
       }
-      l = paper.text(x, y, label.toUpperCase()).attr({
+      l = paper.text(legendPosX, legendPosY, label.toUpperCase()).attr({
         font: "16px Arial",
         "font-weight": "bold",
         fill: "#000",
@@ -152,6 +160,7 @@ PiePie = (function() {
       l = l.getBBox();
       legendWidth = l.width;
       legendHeight = l.height + 20;
+      y = legendPosY;
       $(data).each(function(idx, obj) {
         var c, f;
         y += 20;
@@ -160,11 +169,11 @@ PiePie = (function() {
         c.b *= 0.5;
         c = Raphael.hsb2rgb(c);
         f = "315-" + c + "-" + config.colors[idx];
-        paper.rect(x, y, 20, 10).attr({
+        paper.rect(legendPosX, y, 20, 10).attr({
           fill: f,
           stroke: "none"
         });
-        l = paper.text(x + 24, y + 4, obj.title.toUpperCase()).attr({
+        l = paper.text(legendPosX + 24, y + 4, obj.title.toUpperCase()).attr({
           "text-anchor": "start"
         });
         l = l.getBBox();
